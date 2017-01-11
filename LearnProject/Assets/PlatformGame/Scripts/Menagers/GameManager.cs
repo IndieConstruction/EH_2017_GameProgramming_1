@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -12,11 +13,13 @@ public class GameManager : MonoBehaviour {
     /// Monete attualmente raccotte dal giocatore
     /// </summary>
     int CoinsCollected = 0;
+    public Text TextCoin;
 
 	// Use this for initialization
 	void Start () {
         GameObject[] coins = GameObject.FindGameObjectsWithTag("Coin");
         MaxCoins = coins.Length;
+        UpdateCoinUI();
     }
 	
 	// Update is called once per frame
@@ -31,5 +34,14 @@ public class GameManager : MonoBehaviour {
         if (CoinsCollected == MaxCoins) {
             Debug.Log("Hai Vinto");
         }
+        UpdateCoinUI();
     }
+
+    /// <summary>
+    /// Aggiorna il valore del TextCoin
+    /// </summary>
+    void UpdateCoinUI() {
+        TextCoin.text = CoinsCollected.ToString() + "/" + MaxCoins.ToString();
+    }
+
 }
