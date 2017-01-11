@@ -11,11 +11,11 @@
 - conteggio monete raccolte
 - conteggio totale monete nel livello
 - UI monete raccolte
+- UI monete raccolte v.1.1
 
 ***********************
 ** Todos
 ***********************
-- UI monete raccolte v.1.1
 - raccolta arma
 - utilizzo arma (proiettili limitati)
 - tipologia arma

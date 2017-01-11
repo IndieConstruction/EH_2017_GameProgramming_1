@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour {
     /// Monete attualmente raccotte dal giocatore
     /// </summary>
     int CoinsCollected = 0;
-    public Text TextCoin;
+    public Text CoinText;
+    public Slider CoinSlider;
 
 	// Use this for initialization
 	void Start () {
@@ -41,7 +42,20 @@ public class GameManager : MonoBehaviour {
     /// Aggiorna il valore del TextCoin
     /// </summary>
     void UpdateCoinUI() {
-        TextCoin.text = CoinsCollected.ToString() + "/" + MaxCoins.ToString();
+        CoinText.text = CoinsCollected.ToString() + "/" + MaxCoins.ToString();
+        float sliderNewValue = (float)CoinsCollected / (float)MaxCoins;
+        CoinSlider.value = sliderNewValue;
+        // Controllo il valore della slider
+        if (sliderNewValue <= 0.3f) {
+            // rosso
+            CoinSlider.fillRect.gameObject.GetComponent<Image>().color = Color.red;
+        } else if (sliderNewValue > 0.3f && sliderNewValue <= 0.7f) {
+            // giallo
+            CoinSlider.fillRect.gameObject.GetComponent<Image>().color = Color.yellow;
+        } else {
+            // verde
+            CoinSlider.fillRect.gameObject.GetComponent<Image>().color = Color.green;
+        }
     }
 
 }
