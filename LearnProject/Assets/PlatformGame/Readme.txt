@@ -7,13 +7,14 @@
 - enemy con AI base (destra e sinistra con collider invisibili)
 - player killable
 - stato di gameover
+- creazione gamemanager
+- conteggio monete raccolte
+- conteggio totale monete nel livello
 
 ***********************
 ** Todos
 ***********************
-- creazione gamemanager
-- conteggio monete raccolte
-- conteggio totale monete nel livello
+
 - raccolta arma
 - utilizzo arma (proiettili limitati)
 - tipologia arma
