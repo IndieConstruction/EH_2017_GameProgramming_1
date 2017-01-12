@@ -15,6 +15,7 @@ namespace Learn.Platformer {
         }
 
         void Update() {
+
             if (Input.GetKeyDown(KeyCode.J) && isGrounded == true) {
                 rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
             }

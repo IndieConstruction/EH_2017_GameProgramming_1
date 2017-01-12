@@ -8,6 +8,7 @@ public class WindowGeneric : MonoBehaviour {
 
     public Text TestoVittoria;
     public Image VictoryScreen;
+    public Button BackToMainButton;
 
     // Use this for initialization
     void Start () {
@@ -17,6 +18,8 @@ public class WindowGeneric : MonoBehaviour {
     public void Display(bool _active) {
         TestoVittoria.enabled = _active;
         VictoryScreen.enabled = _active;
+        if(_active == false)
+            BackToMainButton.gameObject.SetActive(_active);
     }
 
     /// <summary>
@@ -27,5 +30,15 @@ public class WindowGeneric : MonoBehaviour {
     public void DisplayText(string _testo, bool _show) {
         TestoVittoria.text = _testo;
         Display(_show);        
+    }
+
+    /// <summary>
+    /// Change text value and show with back menu button.
+    /// </summary>
+    /// <param name="_testo"></param>
+    /// <param name="_show"></param>
+    public void DisplayTextWithBackToMain(string _testo, bool _show) {
+        DisplayText(_testo, _show);
+        BackToMainButton.gameObject.SetActive(_show);
     }
 }

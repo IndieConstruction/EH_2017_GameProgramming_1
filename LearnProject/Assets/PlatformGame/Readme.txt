@@ -14,6 +14,8 @@
 - UI monete raccolte v.1.1
 - creazione stato di vincita
 - Componente generic window
+- Pause
+- Navigazione MainMenu e scene
 
 ***********************
 ** Todos

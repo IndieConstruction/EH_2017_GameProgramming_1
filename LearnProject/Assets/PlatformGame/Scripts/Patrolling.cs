@@ -10,7 +10,10 @@ public class Patrolling : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if (IsRight == true) {
+        if (FindObjectOfType<GameManager>().IsGamePaused) {
+            return;
+        }
+        if (IsRight == true) {
             PatrollingDx();
         } else {
             PatrollingSx();

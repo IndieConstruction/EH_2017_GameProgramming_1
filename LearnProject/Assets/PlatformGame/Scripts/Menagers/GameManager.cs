@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -23,6 +24,11 @@ public class GameManager : MonoBehaviour {
     /// Stato di vincita
     /// </summary>
     bool IsWinning = false;
+
+    /// <summary>
+    /// Stato di pausa del gioco.
+    /// </summary>
+    public bool IsGamePaused = false;
     
 
 	// Use this for initialization
@@ -61,6 +67,7 @@ public class GameManager : MonoBehaviour {
             CoinSlider.fillRect.gameObject.GetComponent<Image>().color = Color.green;
         }
     }
+
     #region API
     /// <summary>
     /// Settala variabile di vittoria(IsWinning) a true
@@ -80,6 +87,29 @@ public class GameManager : MonoBehaviour {
         }
 
         UpdateCoinUI();
+    }
+
+    /// <summary>
+    /// Mette in pausa il gioco.
+    /// </summary>
+    public void PauseGame() {
+        if (IsGamePaused == true) {
+            // Sono già in pausa
+            IsGamePaused = false;
+            UI_WG.Display(false);
+            Time.timeScale = 1f;
+        } else {
+            // non sono in pausa
+            IsGamePaused = true;
+            UI_WG.DisplayTextWithBackToMain("Pause", true);
+            Time.timeScale = 0f;
+        }
+        
+    }
+
+    public void BackToMainMenu() {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
     }
     #endregion
 }
