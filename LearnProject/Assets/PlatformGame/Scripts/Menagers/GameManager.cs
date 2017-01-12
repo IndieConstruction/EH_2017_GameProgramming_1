@@ -15,28 +15,32 @@ public class GameManager : MonoBehaviour {
     int CoinsCollected = 0;
     public Text CoinText;
     public Slider CoinSlider;
+    GameObject PortaF;
+    WindowGeneric UI_WG;
+    
+
+    /// <summary>
+    /// Stato di vincita
+    /// </summary>
+    bool IsWinning = false;
+    
 
 	// Use this for initialization
 	void Start () {
         GameObject[] coins = GameObject.FindGameObjectsWithTag("Coin");
         MaxCoins = coins.Length;
         UpdateCoinUI();
+        PortaF = GameObject.Find("PortaFinale");
+        UI_WG = FindObjectOfType<WindowGeneric>();
+
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 
 	}
-    /// <summary>
-    /// Incrementa il contatore delle monete raccolte dal player
-    /// </summary>
-    public void AddCoins() {
-        CoinsCollected = CoinsCollected + 1;
-        if (CoinsCollected == MaxCoins) {
-            Debug.Log("Hai Vinto");
-        }
-        UpdateCoinUI();
-    }
+    
 
     /// <summary>
     /// Aggiorna il valore del TextCoin
@@ -57,5 +61,25 @@ public class GameManager : MonoBehaviour {
             CoinSlider.fillRect.gameObject.GetComponent<Image>().color = Color.green;
         }
     }
+    #region API
+    /// <summary>
+    /// Settala variabile di vittoria(IsWinning) a true
+    /// </summary>
+    public void DoWin() {
+        IsWinning = true;
+        UI_WG.DisplayText("Hai Vinto", true);        
+    }
 
+    /// <summary>
+    /// Incrementa il contatore delle monete raccolte dal player
+    /// </summary>
+    public void AddCoins() {
+        CoinsCollected = CoinsCollected + 1;
+        if (CoinsCollected == MaxCoins) {
+            PortaF.GetComponent<BoxCollider2D>().isTrigger = true;
+        }
+
+        UpdateCoinUI();
+    }
+    #endregion
 }

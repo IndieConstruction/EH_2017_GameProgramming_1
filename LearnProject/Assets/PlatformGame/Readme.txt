@@ -12,6 +12,8 @@
 - conteggio totale monete nel livello
 - UI monete raccolte
 - UI monete raccolte v.1.1
+- creazione stato di vincita
+- Componente generic window
 
 ***********************
 ** Todos
