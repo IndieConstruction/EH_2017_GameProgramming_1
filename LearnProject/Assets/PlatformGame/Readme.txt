@@ -16,6 +16,7 @@
 - Componente generic window
 - Pause
 - Navigazione MainMenu e scene
+- DontDestroyOnLoad x Audiomanager
 
 ***********************
 ** Todos
