@@ -33,8 +33,9 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        
         GameObject[] coins = GameObject.FindGameObjectsWithTag("Coin");
-        MaxCoins = coins.Length;
+        MaxCoins = coins.Length;        
         UpdateCoinUI();
         PortaF = GameObject.Find("PortaFinale");
         UI_WG = FindObjectOfType<WindowGeneric>();
@@ -52,19 +53,26 @@ public class GameManager : MonoBehaviour {
     /// Aggiorna il valore del TextCoin
     /// </summary>
     void UpdateCoinUI() {
-        CoinText.text = CoinsCollected.ToString() + "/" + MaxCoins.ToString();
-        float sliderNewValue = (float)CoinsCollected / (float)MaxCoins;
-        CoinSlider.value = sliderNewValue;
-        // Controllo il valore della slider
-        if (sliderNewValue <= 0.3f) {
-            // rosso
-            CoinSlider.fillRect.gameObject.GetComponent<Image>().color = Color.red;
-        } else if (sliderNewValue > 0.3f && sliderNewValue <= 0.7f) {
-            // giallo
-            CoinSlider.fillRect.gameObject.GetComponent<Image>().color = Color.yellow;
-        } else {
-            // verde
-            CoinSlider.fillRect.gameObject.GetComponent<Image>().color = Color.green;
+
+        if (CoinText != null) {
+            // Gestore contore (Text)
+            CoinText.text = CoinsCollected.ToString() + "/" + MaxCoins.ToString();            
+        }
+
+        if (CoinSlider != null) {
+            // Controllo il valore della slider
+            float sliderNewValue = (float)CoinsCollected / (float)MaxCoins;
+            CoinSlider.value = sliderNewValue;
+            if (sliderNewValue <= 0.3f) {
+                // rosso
+                CoinSlider.fillRect.gameObject.GetComponent<Image>().color = Color.red;
+            } else if (sliderNewValue > 0.3f && sliderNewValue <= 0.7f) {
+                // giallo
+                CoinSlider.fillRect.gameObject.GetComponent<Image>().color = Color.yellow;
+            } else {
+                // verde
+                CoinSlider.fillRect.gameObject.GetComponent<Image>().color = Color.green;
+            }
         }
     }
 

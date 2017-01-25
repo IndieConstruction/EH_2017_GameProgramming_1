@@ -25,6 +25,13 @@
 - utilizzo arma (proiettili limitati)
 - tipologia arma
 - switch arma
+
+*Weapon Manager: proprietà nativa di chiunque possa sparare e raccogliere armi
+*Avere una lista armi nel WM (Weapon Manager)
+*Classe base per tutte le armi
+*Hand
+
+
 - enemy AI v1.1 (salto random al cambio direzione)
 - raccolta proiettili
 - cambio camera (camera zoom)
