@@ -17,21 +17,16 @@
 - Pause
 - Navigazione MainMenu e scene
 - DontDestroyOnLoad x Audiomanager
-
+- Weapon Manager: proprietà nativa di chiunque possa sparare e raccogliere armi
+- Classe base per tutte le armi (tipologia arma)
+- raccolta arma
+- switch arma
+- Hand e Bag per come posizioni per gli oggetti raccolti.
 ***********************
 ** Todos
 ***********************
-- raccolta arma
+- Bug switch armi e raccolta.
 - utilizzo arma (proiettili limitati)
-- tipologia arma
-- switch arma
-
-*Weapon Manager: proprietà nativa di chiunque possa sparare e raccogliere armi
-*Avere una lista armi nel WM (Weapon Manager)
-*Classe base per tutte le armi
-*Hand
-
-
 - enemy AI v1.1 (salto random al cambio direzione)
 - raccolta proiettili
 - cambio camera (camera zoom)
