@@ -26,7 +26,6 @@ public class WeaponManager : MonoBehaviour {
         set {
             oldCurrentWeapon = currentWeapon;
             currentWeapon = value;
-            SetParentWeapon(CurrentWeapon, PlayerHand);
             PlaceOldWeapon();
         }
     }
@@ -39,7 +38,7 @@ public class WeaponManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+       
 	}
     /// <summary>
     /// Gestisce la sorte dell'arma che avevi in mano prima
@@ -49,30 +48,41 @@ public class WeaponManager : MonoBehaviour {
             if(WeaponCollection[i] == null) {
                 WeaponCollection[i] = oldCurrentWeapon;
                 if (oldCurrentWeapon != null) {
-                    Debug.Log("Destroy");
-                    GameObject.Destroy(oldCurrentWeapon.gameObject);
+                    //Distrugge il primo oggetto con Component Weapon tra le istanze dei propri figli
+                    Destroy(GetComponentInChildren<Weapon>().gameObject);
                 }
                 return;
             }
         }
-        SetParentWeapon(oldCurrentWeapon,null);
+        SetWeapon(oldCurrentWeapon);
+        //Distrugge il primo oggetto con Component Weapon tra le istanze dei propri figli
+        Destroy(GetComponentInChildren<Weapon>().gameObject);
     }
 
+    /// <summary>
+    /// Anzichè salvare il component Weapon del GameObject in scena, prima ne istanzia uno nuovo e distrugge quello con cui si entra in collisione,
+    /// e in CurrentWeapon viene salvato il component della nuova istanza.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.GetComponent<Weapon>() != null && collision.GetType().Name == "CircleCollider2D") {
-            CurrentWeapon = collision.GetComponent<Weapon>();
-            GameObject.Destroy(collision.gameObject);       
+
+            SetParentWeapon(collision.GetComponent<Weapon>(), PlayerHand);
+            Destroy(collision.gameObject);
         }
     }
 
     /// <summary>
-    /// Raccoglie arma 
+    /// Raccoglie arma assegnandola a CurrentWeapon e istanziandola come figlia di _parent
     /// </summary>
-    /// <param name="_weaponToLoad"></param>
-    private void SetParentWeapon(Weapon _weaponToLoad, Transform _parent) {
+    /// <param name="_weaponToLoad">Arma da caricare</param>
+    /// /// <param name="_parent">L'oggetto padre dell'istanza</param>
+    private void SetParentWeapon(Weapon _weaponToLoad, Transform _parent)
+    {
         GameObject prefabLoaded = null;
 
-        switch (_weaponToLoad.Name) {
+        switch (_weaponToLoad.Name)
+        {
             case "Pistola":
                 prefabLoaded = Resources.Load<GameObject>("Weapons/Gun");
                 break;
@@ -83,8 +93,39 @@ public class WeaponManager : MonoBehaviour {
                 break;
         }
 
-        if (prefabLoaded != null) {
+        if (prefabLoaded != null)
+        {
             Instantiate<GameObject>(prefabLoaded, _parent).transform.localPosition = Vector2.zero;
         }
+
+        CurrentWeapon = prefabLoaded.GetComponent<Weapon>();
+    }
+
+
+    /// <summary>
+    /// Raccoglie arma Senza l'assegnazione a CurrentWeapon e la istanzia
+    /// </summary>
+    /// <param name="_weaponToLoad">Arma da caricare</param>
+    private void SetWeapon(Weapon _weaponToLoad)
+    {
+        GameObject prefabLoaded = null;
+
+        switch (_weaponToLoad.Name)
+        {
+            case "Pistola":
+                prefabLoaded = Resources.Load<GameObject>("Weapons/Gun");
+                break;
+            case "Fucile":
+                prefabLoaded = Resources.Load<GameObject>("Weapons/Shotgun");
+                break;
+            default:
+                break;
+        }
+
+        if (prefabLoaded != null)
+        {
+            Instantiate<GameObject>(prefabLoaded);
+        }
+       
     }
 }
