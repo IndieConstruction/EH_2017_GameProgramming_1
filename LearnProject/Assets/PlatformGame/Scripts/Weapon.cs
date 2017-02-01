@@ -8,7 +8,9 @@ public class Weapon : MonoBehaviour {
     public int Ammo;
     public float RateOfFire;
     public float RangeOfFire;
-
+    public GameObject Bullet;
+    public float BulletForce = 3f ;
+    
 	// Use this for initialization
 	void Start () {
 		
@@ -18,4 +20,29 @@ public class Weapon : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void Shoot() {
+        if(Ammo > 0) {
+            int Direction = 0;      //Se la mano è rivolta a sinistra avrà valore -1; rivolta a destra, 1.
+            
+            foreach (Transform t in GetComponentsInParent<Transform>()) {
+                if (t.name == "Hand") {
+                    if (t.localPosition.x > 0) {
+                        Direction = 1;
+                    } else {
+                        Direction = -1;
+                    }
+                    break;
+                }
+
+            }
+
+
+           
+            GameObject tempBullet = Instantiate<GameObject>(Bullet, this.transform.position, this.transform.rotation);
+            tempBullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(Direction, 0) * BulletForce, ForceMode2D.Impulse);
+            Ammo = Ammo - 1;
+        }
+
+    }
 }

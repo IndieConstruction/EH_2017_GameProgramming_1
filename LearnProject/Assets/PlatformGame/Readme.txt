@@ -22,11 +22,14 @@
 - raccolta arma
 - switch arma
 - Hand e Bag per come posizioni per gli oggetti raccolti.
+- Bug switch armi e raccolta.
+- Sparare (proiettili limitati)
+
 ***********************
 ** Todos
 ***********************
-- Bug switch armi e raccolta.
-- utilizzo arma (proiettili limitati)
+
+- Distruzione dei proiettili sparati
 - enemy AI v1.1 (salto random al cambio direzione)
 - raccolta proiettili
 - cambio camera (camera zoom)

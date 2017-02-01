@@ -38,7 +38,10 @@ public class WeaponManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-       
+       if (CurrentWeapon != null) {
+            if (Input.GetKeyDown(KeyCode.Space))
+            currentWeapon.Shoot();
+        }
 	}
     /// <summary>
     /// Gestisce la sorte dell'arma che avevi in mano prima
@@ -54,7 +57,7 @@ public class WeaponManager : MonoBehaviour {
                 return;
             }
         }
-        SetWeapon(oldCurrentWeapon);
+        DropWeapon(oldCurrentWeapon);
         //Distrugge il primo oggetto con Component Weapon tra le istanze dei propri figli
         Destroy(GetComponentInChildren<Weapon>().gameObject);
     }
@@ -79,15 +82,15 @@ public class WeaponManager : MonoBehaviour {
     /// /// <param name="_parent">L'oggetto padre dell'istanza</param>
     private void SetParentWeapon(Weapon _weaponToLoad, Transform _parent)
     {
-        GameObject prefabLoaded = null;
+        Weapon prefabLoaded = null;
 
         switch (_weaponToLoad.Name)
         {
             case "Pistola":
-                prefabLoaded = Resources.Load<GameObject>("Weapons/Gun");
+                prefabLoaded = Resources.Load<Weapon>("Weapons/Gun");
                 break;
             case "Fucile":
-                prefabLoaded = Resources.Load<GameObject>("Weapons/Shotgun");
+                prefabLoaded = Resources.Load<Weapon>("Weapons/Shotgun");
                 break;
             default:
                 break;
@@ -95,10 +98,12 @@ public class WeaponManager : MonoBehaviour {
 
         if (prefabLoaded != null)
         {
-            Instantiate<GameObject>(prefabLoaded, _parent).transform.localPosition = Vector2.zero;
+           CurrentWeapon = Instantiate<Weapon>(prefabLoaded, _parent, true);
+           CurrentWeapon.transform.localPosition = Vector2.zero;
+           
         }
 
-        CurrentWeapon = prefabLoaded.GetComponent<Weapon>();
+        
     }
 
 
@@ -106,7 +111,7 @@ public class WeaponManager : MonoBehaviour {
     /// Raccoglie arma Senza l'assegnazione a CurrentWeapon e la istanzia
     /// </summary>
     /// <param name="_weaponToLoad">Arma da caricare</param>
-    private void SetWeapon(Weapon _weaponToLoad)
+    private void DropWeapon(Weapon _weaponToLoad)
     {
         GameObject prefabLoaded = null;
 
