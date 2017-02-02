@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 namespace Learn.Platformer {
+
     public class SideMovementController : MonoBehaviour {
 
         // Variabile settabile esternamente
@@ -22,21 +23,38 @@ namespace Learn.Platformer {
         void Update() {
             // Calcolo movimento laterale
             if (Input.GetKey(KeyCode.A)) {
-                SideMovement = -1;
+                Move(Directions.Left);
                 hand.transform.localPosition = new Vector2(handInitialPosition.x * SideMovement , handInitialPosition.y);
 
             } else if (Input.GetKey(KeyCode.D)) {
-                SideMovement = 1;
+                Move(Directions.Right);
                 hand.transform.localPosition = new Vector2(handInitialPosition.x * SideMovement, handInitialPosition.y);
             } else {
-                SideMovement = 0;
+                Move(Directions.Idle);
             }
 
             // Animazione del movimento laterale
             anim.SetInteger("SideMovement", SideMovement);
             // Movimento laterale
-            transform.position = transform.position + new Vector3(SideMovement * SpeedMultiplier, 0, 0);
         }
 
+        public void Move(Directions _direction) {
+            if (_direction == Directions.Right) {
+                SideMovement = 1;
+            } else if(_direction == Directions.Left) {
+                SideMovement = -1;
+            }
+            else {
+                SideMovement = 0;
+            }
+            transform.position = (Vector2)transform.position + new Vector2(SideMovement * SpeedMultiplier, 0);
+        }
+
+    }
+
+    public enum Directions {
+        Right,
+        Left,
+        Idle
     }
 }

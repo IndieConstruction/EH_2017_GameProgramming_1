@@ -10,14 +10,25 @@ namespace Learn.Platformer {
         bool isGrounded = false;
         Rigidbody2D rb;
 
+        /// <summary>
+        /// Se è true il game object a cui è collegato è un player
+        /// </summary>
+        bool isPlayer;
+
         void Start() {
             rb = GetComponent<Rigidbody2D>();
+            if(gameObject.tag == "Player") {
+                isPlayer = true;
+            }
+            else {
+                isPlayer = false;
+            }
         }
 
         void Update() {
 
-            if (Input.GetKeyDown(KeyCode.J) && isGrounded == true) {
-                rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+            if (Input.GetKeyDown(KeyCode.J) && isPlayer) {
+                Jump();
             }
         }
 
@@ -32,5 +43,13 @@ namespace Learn.Platformer {
         void OnCollisionExit2D(Collision2D coll) {
             isGrounded = false;
         }
+
+        #region API
+        public void Jump() {
+            if(isGrounded == true) {
+                rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+            }
+        }
+        #endregion
     }
 }

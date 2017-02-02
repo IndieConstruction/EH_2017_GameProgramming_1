@@ -1,40 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
+namespace Learn.Platformer {
 
-public class Patrolling : MonoBehaviour {
-    bool IsRight;
-	// Use this for initialization
-	void Start () {
-        IsRight = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (FindObjectOfType<GameManager>().IsGamePaused) {
-            return;
+    public class Patrolling : SideMovementController {
+        Directions currentDirection;
+        // Use this for initialization
+        void Start() {
+            currentDirection = Directions.Right;
         }
-        if (IsRight == true) {
-            PatrollingDx();
-        } else {
-            PatrollingSx();
+
+        // Update is called once per frame
+        void Update() {
+            if (FindObjectOfType<GameManager>().IsGamePaused) {
+                return;
+            }
+            Move(currentDirection);
         }
-	}
-
-    void PatrollingDx() {
-        transform.position = new Vector2(transform.position.x + 1 * 0.02f, transform.position.y);
-    }
-    void PatrollingSx() {
-        transform.position = new Vector2(transform.position.x + -1 * 0.02f, transform.position.y);
-    }
-
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "EdgeCollider") {
-            if (IsRight == true) {
-                IsRight = false;
+        void ChangeDirection() {
+            if (currentDirection == Directions.Right) {
+                currentDirection = Directions.Left;
             } else {
-                IsRight = true;
+                currentDirection = Directions.Right;
             }
         }
-    }
 
+        void OnTriggerEnter2D(Collider2D other) {
+            if (other.tag == "EdgeCollider") {
+                ChangeDirection();
+            }
+        }
+    } 
 }

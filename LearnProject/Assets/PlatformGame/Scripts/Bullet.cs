@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Learn.Platformer;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,9 +18,10 @@ public class Bullet : MonoBehaviour {
             Destroy(gameObject);
         }
 	}
-
+    
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.GetComponent<Weapon>() || collision.gameObject.tag == "EdgeCollider" || collision.gameObject.tag == "Player")
+        if (collision.gameObject.GetComponent<Weapon>() || collision.gameObject.tag == "EdgeCollider" 
+            || collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
         {
             return;
         }
