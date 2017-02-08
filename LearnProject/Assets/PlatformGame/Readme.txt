@@ -26,11 +26,12 @@
 - Sparare (proiettili limitati)
 - Distruzione dei proiettili sparati
 - enemy AI v1.1 (salto random temporizzato, arma nemico e sparo temporizzato)
+- direzione arma nemico
 ***********************
 ** Todos
 ***********************
 
-- direzione arma nemico
+
 - bullet deve avere la lista degli oggetti , l'owner, e il colore a seonda dell'owner 
 - raccolta proiettili
 - cambio camera (camera zoom)
