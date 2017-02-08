@@ -3,11 +3,8 @@ using System.Collections;
 namespace Learn.Platformer {
 
     public class Patrolling : SideMovementController {
-        Direction currentDirection;
-        // Use this for initialization
-        void Start() {
-            currentDirection = Direction.Right;
-        }
+        Direction currentDirection = Direction.Right;
+                   
 
         // Update is called once per frame
         void Update() {
@@ -19,8 +16,10 @@ namespace Learn.Platformer {
         void ChangeDirection() {
             if (currentDirection == Direction.Right) {
                 currentDirection = Direction.Left;
+                ChangeHandPosition(-1);
             } else {
                 currentDirection = Direction.Right;
+                ChangeHandPosition(1);
             }
         }
 

@@ -10,7 +10,7 @@ namespace Learn.Platformer {
         // Variabili ad uso interno
         int SideMovement = 0;
         private Animator anim;
-        GameObject hand;
+        public GameObject hand;
         Vector2 handInitialPosition;
 
         /// <summary>
@@ -29,7 +29,9 @@ namespace Learn.Platformer {
         void Start() {
             // carico il riferimento all'animator
             anim = GetComponent<Animator>();
-            hand = GameObject.Find("Hand");
+            if (hand == null) {
+                hand = GameObject.Find("Hand");
+            }
             handInitialPosition = hand.transform.localPosition;
         }
 
@@ -37,11 +39,10 @@ namespace Learn.Platformer {
             // Calcolo movimento laterale
             if (Input.GetKey(KeyCode.A)) {
                 Move(Direction.Left);
-                hand.transform.localPosition = new Vector2(handInitialPosition.x * SideMovement , handInitialPosition.y);
-
+                ChangeHandPosition(SideMovement);
             } else if (Input.GetKey(KeyCode.D)) {
                 Move(Direction.Right);
-                hand.transform.localPosition = new Vector2(handInitialPosition.x * SideMovement, handInitialPosition.y);
+                ChangeHandPosition(SideMovement);
             } else {
                 Move(Direction.Idle);
             }
@@ -63,6 +64,10 @@ namespace Learn.Platformer {
                 SideMovement = 0;
             }
             transform.position = (Vector2)transform.position + new Vector2(SideMovement * SpeedMultiplier, 0);
+        }
+
+        protected void ChangeHandPosition(int _direction) {
+            hand.transform.localPosition = new Vector2(handInitialPosition.x * _direction, handInitialPosition.y);
         }
 
     }

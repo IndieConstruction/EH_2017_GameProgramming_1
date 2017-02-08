@@ -67,7 +67,7 @@ namespace Learn.Platformer {
         /// </summary>
         /// <param name="collision"></param>
         private void OnTriggerEnter2D(Collider2D collision) {
-            if (collision.GetComponent<Weapon>() != null && collision.GetType().Name == "CircleCollider2D") {
+            if (collision.GetComponent<Weapon>() != null /*&& collision.GetType().Name == "CircleCollider2D"*/) {
 
                 SetParentWeapon(collision.GetComponent<Weapon>(), PlayerHand);
                 Destroy(collision.gameObject);
