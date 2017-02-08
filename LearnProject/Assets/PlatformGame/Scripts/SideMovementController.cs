@@ -13,6 +13,19 @@ namespace Learn.Platformer {
         GameObject hand;
         Vector2 handInitialPosition;
 
+        /// <summary>
+        /// return the actual direction of the object of SideMovementController
+        /// </summary>
+        /// <returns></returns>
+        public Direction GetDirection() {
+            if (SideMovement == 1)
+                return Direction.Right;
+            if (SideMovement == -1)
+                return Direction.Left;
+
+           return Direction.Idle;
+        }
+
         void Start() {
             // carico il riferimento all'animator
             anim = GetComponent<Animator>();
@@ -23,14 +36,14 @@ namespace Learn.Platformer {
         void Update() {
             // Calcolo movimento laterale
             if (Input.GetKey(KeyCode.A)) {
-                Move(Directions.Left);
+                Move(Direction.Left);
                 hand.transform.localPosition = new Vector2(handInitialPosition.x * SideMovement , handInitialPosition.y);
 
             } else if (Input.GetKey(KeyCode.D)) {
-                Move(Directions.Right);
+                Move(Direction.Right);
                 hand.transform.localPosition = new Vector2(handInitialPosition.x * SideMovement, handInitialPosition.y);
             } else {
-                Move(Directions.Idle);
+                Move(Direction.Idle);
             }
 
             // Animazione del movimento laterale
@@ -38,10 +51,12 @@ namespace Learn.Platformer {
             // Movimento laterale
         }
 
-        public void Move(Directions _direction) {
-            if (_direction == Directions.Right) {
+        
+
+        public void Move(Direction _direction) {
+            if (_direction == Direction.Right) {
                 SideMovement = 1;
-            } else if(_direction == Directions.Left) {
+            } else if(_direction == Direction.Left) {
                 SideMovement = -1;
             }
             else {
@@ -52,7 +67,7 @@ namespace Learn.Platformer {
 
     }
 
-    public enum Directions {
+    public enum Direction {
         Right,
         Left,
         Idle

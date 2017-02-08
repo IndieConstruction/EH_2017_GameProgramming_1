@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public void DoWin() {
         IsWinning = true;
+        if(UI_WG != null)
         UI_WG.DisplayText("Hai Vinto", true);        
     }
 

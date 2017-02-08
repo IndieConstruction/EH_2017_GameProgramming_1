@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace Learn.Platformer {
+
     public class Weapon : MonoBehaviour {
 
         public string Owner;
@@ -10,16 +12,31 @@ namespace Learn.Platformer {
         public float RateOfFire;
         public float RangeOfFire;
         public GameObject Bullet;
+        public SideMovementController SMC;
+        SpriteRenderer SR;
         public float BulletForce = 3f;
 
         // Use this for initialization
         void Start() {
+            if (SMC == null)
+                SMC = GetComponentInParent<SideMovementController>();
 
+            SR = GetComponent<SpriteRenderer>();
         }
 
         // Update is called once per frame
         void Update() {
+            TurnWeapon();
+        }
 
+        void TurnWeapon() {
+            if (SMC == null)
+                return;
+
+            if (SMC.GetDirection() == Direction.Left)
+                SR.flipX = true;
+            else if(SMC.GetDirection() == Direction.Right)
+                SR.flipX = false;
         }
 
         public void Shoot() {
