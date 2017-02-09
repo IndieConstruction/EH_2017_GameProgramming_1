@@ -95,7 +95,7 @@ namespace Learn.Platformer {
 
             if (prefabLoaded != null) {
                 CurrentWeapon = Instantiate<Weapon>(prefabLoaded, _parent, true);
-                CurrentWeapon.Owner = "Player";
+                //CurrentWeapon.Owner = "Player";
                 CurrentWeapon.transform.localPosition = Vector2.zero;
 
             }

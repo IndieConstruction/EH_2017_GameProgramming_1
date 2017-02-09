@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
+    IShooter Owner;
     float startTime;
     float timeToCount = 4f;
 	// Use this for initialization
 	void Start () {
         startTime = Time.time;
+
     }
 	
 	// Update is called once per frame
@@ -20,11 +22,19 @@ public class Bullet : MonoBehaviour {
 	}
     
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.GetComponent<Weapon>() || collision.gameObject.tag == "EdgeCollider" 
-            || collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
-        {
-            return;
+        IKillable killable = collision.gameObject.GetComponent<IKillable>();
+        if(killable != null) {
+            foreach (IKillable item in Owner.GetKillable()) {
+                if(item.GetType() == killable.GetType()) {
+                    killable.Kill();
+                }
+            }
+            //Owner.GetKillable().Exists(k => k.GetType() == killable.GetType())        
         }
-        Destroy(gameObject);
+    }
+
+    public void SetOwner(IShooter _owner) {
+        Owner = _owner;
+        gameObject.GetComponent<SpriteRenderer>().color = Owner.GetBulletColor();
     }
 }

@@ -6,7 +6,6 @@ namespace Learn.Platformer {
 
     public class Weapon : MonoBehaviour {
 
-        public string Owner;
         public string Name;
         public int Ammo;
         public float RateOfFire;
@@ -57,14 +56,11 @@ namespace Learn.Platformer {
 
 
 
-                GameObject tempBullet = Instantiate<GameObject>(Bullet, this.transform.position, this.transform.rotation);
+                Bullet tempBullet = Instantiate<Bullet>(Bullet.GetComponent<Bullet>(), this.transform.position, this.transform.rotation);
                 tempBullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(Direction, 0) * BulletForce, ForceMode2D.Impulse);
-                if(Owner == "Player") {
-                    tempBullet.GetComponent<Killer>().target = "Enemy";
-                }
-                else {
-                    tempBullet.GetComponent<Killer>().target = "Player";
-                }
+
+                IShooter owner = GetComponentInParent<IShooter>();
+                tempBullet.SetOwner(owner);
                 
                 Ammo = Ammo - 1;
             }
