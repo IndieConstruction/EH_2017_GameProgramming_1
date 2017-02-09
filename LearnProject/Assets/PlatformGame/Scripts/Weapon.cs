@@ -38,6 +38,12 @@ namespace Learn.Platformer {
                 SR.flipX = false;
         }
 
+        public void DropMe() {
+            gameObject.transform.SetParent(null);
+            gameObject.AddComponent<Rigidbody2D>();
+            Destroy(gameObject, 3f);
+        }
+
         public void Shoot() {
             if (Ammo > 0) {
                 int Direction = 0;      //Se la mano è rivolta a sinistra avrà valore -1; rivolta a destra, 1.

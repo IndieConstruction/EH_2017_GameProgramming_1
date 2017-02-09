@@ -40,8 +40,19 @@ namespace Learn.Platformer {
             if (CurrentWeapon != null) {
                 if (Input.GetKeyDown(KeyCode.Space))
                     currentWeapon.Shoot();
+                if (currentWeapon.Ammo < 1) {
+                    currentWeapon.DropMe();
+                    SwitchWeapon();
+                }
+
             }
         }
+
+        void SwitchWeapon() {
+            if(WeaponCollection[0] != null)
+                SetParentWeapon(WeaponCollection[0], PlayerHand);
+        }
+
         /// <summary>
         /// Gestisce la sorte dell'arma che avevi in mano prima
         /// </summary>
@@ -95,12 +106,8 @@ namespace Learn.Platformer {
 
             if (prefabLoaded != null) {
                 CurrentWeapon = Instantiate<Weapon>(prefabLoaded, _parent, true);
-                //CurrentWeapon.Owner = "Player";
                 CurrentWeapon.transform.localPosition = Vector2.zero;
-
             }
-
-
         }
 
 
