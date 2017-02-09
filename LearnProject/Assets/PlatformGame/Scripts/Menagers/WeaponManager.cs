@@ -6,7 +6,7 @@ namespace Learn.Platformer {
     /// Elemento che gestisce la raccolta, la collezione delle armi e la capacità di sparare
     /// del gameobject che ha questo component
     /// </summary>
-    public class WeaponManager : MonoBehaviour {
+    public class WeaponManager : MonoBehaviour, ILiveBehaviour {
 
         public Transform PlayerHand;
 

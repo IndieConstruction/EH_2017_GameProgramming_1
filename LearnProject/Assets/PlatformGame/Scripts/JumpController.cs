@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Learn.Platformer {
 
-    public class JumpController : MonoBehaviour {
+    public class JumpController : MonoBehaviour, ILiveBehaviour {
 
         public float JumpForce = 6;
 

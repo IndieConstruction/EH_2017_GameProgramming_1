@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Learn.Platformer {
     [RequireComponent(typeof (JumpController))]
     [System.Serializable]
-    public class AIAgent : MonoBehaviour, IShooter, IKillable {
+    public class AIAgent : MonoBehaviour, IShooter, IKillable, ILiveBehaviour {
 
         public float minTime = 0.1f;
         public float maxTime = 1f;
@@ -56,7 +56,9 @@ namespace Learn.Platformer {
         }
 
         public void Kill() {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 30f, ForceMode2D.Impulse);
+            gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 2f, ForceMode2D.Impulse);
+            foreach (MonoBehaviour item in gameObject.GetComponentsInChildren<ILiveBehaviour>())
+                item.enabled = false;
             foreach (var item in gameObject.GetComponentsInChildren<Collider2D>())
                 item.enabled = false;
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;

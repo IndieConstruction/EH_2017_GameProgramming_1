@@ -2,7 +2,7 @@
 using System.Collections;
 namespace Learn.Platformer {
 
-    public class Patrolling : SideMovementController {
+    public class Patrolling : SideMovementController, ILiveBehaviour {
         Direction currentDirection = Direction.Right;
                    
 

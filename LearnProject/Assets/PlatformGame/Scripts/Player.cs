@@ -27,6 +27,8 @@ namespace Learn.Platformer {
 
         public void Kill() {
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            foreach (MonoBehaviour item in gameObject.GetComponentsInChildren<ILiveBehaviour>())
+                item.enabled = false;
         }
 
 

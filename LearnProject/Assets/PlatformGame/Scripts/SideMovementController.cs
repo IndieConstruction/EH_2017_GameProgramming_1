@@ -2,7 +2,7 @@
 using System.Collections;
 namespace Learn.Platformer {
 
-    public class SideMovementController : MonoBehaviour {
+    public class SideMovementController : MonoBehaviour, ILiveBehaviour {
 
         // Variabile settabile esternamente
         public float SpeedMultiplier = 0.2f;
